@@ -1,3 +1,4 @@
+import scalafx.scene.image.{ImageView, Image}
 import scalafx.application.JFXApp3
 import scalafx.scene.Scene
 import scalafx.scene.paint.Color._
@@ -9,20 +10,21 @@ import scalafx.scene.layout.{HBox, VBox}
 object App extends JFXApp3 {
   private val w_width = 640.0:Double
   private val w_height = 640.0:Double
-  //private val Ximg = Image(new InputStream)
-  //private val Oimg = ImageIO.read(new File("imgs/O.png"))
+  private var grid:Grid = Grid()
+  def set_grid(_grid: Grid): Unit ={
+    grid = _grid
+  }
+
   private def square(xr: Int, yr: Int): HBox = new HBox {
     padding = Insets(10,10,10,10)
+    val img:Image = grid.arr(yr)(xr).img:Image
+    val view  = new ImageView(img)
+    view.setFitWidth((w_width-60)/3)
+    view.setFitHeight((w_height-100)/3)
     children = Seq(
-      new Rectangle{
-        x = 10+xr*(w_width-60)/3
-        x = 10+yr*(w_height-100)/3
-        width = (w_width-60)/3
-        height = (w_height-100)/3
-        fill = scalafx.scene.paint.Color.Blue
-      }
-      //,new ImageView(Ximg)
+      view
     )
+
   }
 
   private def vbox(xr: Int): VBox = new VBox{
