@@ -22,13 +22,14 @@ class Bot(val grid:Grid) {
     best_move
   }
   private def minmax(grid:Grid,side:Int,depth:Int): Int = {
-    val free = grid.get_free
-    if(grid.check==side){
+    val check = grid.check
+    if(check==side){
       return 10-depth
     }
-    else if(grid.check==3-side){
+    else if(check==3-side){
       return -10+depth
     }
+    val free = grid.get_free
     if(free.isEmpty){
       0
     }
